@@ -15,7 +15,7 @@ public class Driver {
     @Column(name = "driverid")
     private Long driverId;
 
-    @Column(unique = true)
+    @Column(unique = true, name = "code")
     private String code;
     private String forename;
     private String surname;
