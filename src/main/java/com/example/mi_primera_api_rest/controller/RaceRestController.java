@@ -1,7 +1,9 @@
 package com.example.mi_primera_api_rest.controller;
 
 import com.example.mi_primera_api_rest.model.Circuit;
+import com.example.mi_primera_api_rest.model.Race;
 import com.example.mi_primera_api_rest.service.CircuitService;
+import com.example.mi_primera_api_rest.service.RaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,45 +15,45 @@ import java.util.List;
 
 public class RaceRestController {
 
-    private final CircuitService circuitService;
+    private final RaceService raceService;
 
     @Autowired
-    public RaceRestController(CircuitService circuitService) {
-        this.circuitService = circuitService;
+    public RaceRestController(RaceService raceService) {
+        this.raceService = raceService;
     }
 
-    @GetMapping("/circuits")
-    public ResponseEntity<List<Circuit>> getAll() {
-        return ResponseEntity.ok(circuitService.getAllCircuits());
+    @GetMapping("/races")
+    public ResponseEntity<List<Race>> getAll() {
+        return ResponseEntity.ok(raceService.getAllRaces());
     }
 
-    @GetMapping("/circuits/{circuitref}")
-    public ResponseEntity<Circuit> getCircuitByRef(@PathVariable String circuitref) {
-        return this.circuitService.getCircuitByRef(circuitref)
+    @GetMapping("/races/{name}")
+    public ResponseEntity<Race> getRaceByName(@PathVariable String name) {
+        return this.raceService.getRaceByName(name)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/circuits")
-    public ResponseEntity<Circuit> create(@RequestBody Circuit circuit) {
-        if(circuit.getCircuitid() != null){
+    @PostMapping("/races")
+    public ResponseEntity<Race> create(@RequestBody Race race) {
+        if(race.getRaceid() != null){
             return ResponseEntity.badRequest().build();
         }
-        this.circuitService.saveCircuit(circuit);
-        return ResponseEntity.ok(circuit);
+        this.raceService.saveRace(race);
+        return ResponseEntity.ok(race);
 
     }
 
-    @PutMapping("/circuits")
-    public ResponseEntity<Circuit> update(@RequestBody Circuit circuit) {
-        this.circuitService.saveCircuit(circuit);
-        return ResponseEntity.ok(circuit);
+    @PutMapping("/races")
+    public ResponseEntity<Race> update(@RequestBody Race race) {
+        this.raceService.saveRace(race);
+        return ResponseEntity.ok(race);
     }
 
 
-    @DeleteMapping("/circuits/{circuitref}")
-    public ResponseEntity<Circuit> deleteCircuitByRef(@PathVariable String circuitref) {
-        this.circuitService.deleteCircuitByRef(circuitref);
+    @DeleteMapping("/race/{name}")
+    public ResponseEntity<Race> deleteRaceByName(@PathVariable String name) {
+        this.raceService.deleteRaceByName(name);
         return ResponseEntity.noContent().build();
     }
 }

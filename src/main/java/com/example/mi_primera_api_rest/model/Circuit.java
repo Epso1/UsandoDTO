@@ -1,5 +1,6 @@
 package com.example.mi_primera_api_rest.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -23,13 +24,8 @@ public class Circuit {
     private double lng;
     private int alt;
     private String url;
+
+    @OneToOne(mappedBy ="circuit")
+    @JsonIgnoreProperties("circuit")
+    private Race race;
 }
-//circuitid SERIAL PRIMARY KEY,
-//    circuitref VARCHAR (50) UNIQUE NOT NULL,
-//    name VARCHAR (100) UNIQUE NOT NULL,
-//    location VARCHAR (50) NOT NULL,
-//    country VARCHAR (50) NOT NULL,
-//    lat double precision,
-//    lng double precision,
-//    alt integer,
-//    url VARCHAR (100)

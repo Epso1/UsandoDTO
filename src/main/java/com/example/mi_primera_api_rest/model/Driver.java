@@ -1,5 +1,6 @@
 package com.example.mi_primera_api_rest.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -27,12 +28,9 @@ public class Driver {
     @Column(nullable = false)
     private String nationality;
     private String url;
+
+    @ManyToOne
+    @JoinColumn(name = "constructorid")
+    @JsonIgnoreProperties("drivers")
+    Constructor constructor;
 }
-//    driverid SERIAL PRIMARY KEY,
-//    code VARCHAR (50) UNIQUE NOT NULL,
-//    forename VARCHAR (50) NOT NULL,
-//    surname VARCHAR (50) NOT NULL,
-//    dob DATE NOT NULL,
-//    nationality VARCHAR (50) NOT NULL,
-//    constructorid integer,
-//    url VARCHAR (100)

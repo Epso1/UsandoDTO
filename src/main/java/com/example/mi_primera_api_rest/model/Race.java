@@ -20,8 +20,11 @@ public class Race {
     private int year;
     @Column(nullable = false)
     private int round;
-    @Column(nullable = false)
-    private int circuitid;
+
+    @OneToOne
+    @JoinColumn(name = "circuitid", referencedColumnName = "circuitid")
+    private Circuit circuit;
+
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
@@ -31,12 +34,3 @@ public class Race {
     private String url;
 }
 
-
-//raceid SERIAL PRIMARY KEY,
-//    year integer NOT NULL,
-//    round integer NOT NULL,
-//    circuitid integer NOT NULL,
-//    name VARCHAR (100) NOT NULL,
-//    date DATE NOT NULL,
-//    time TIME NOT NULL,
-//    url VARCHAR (100)
