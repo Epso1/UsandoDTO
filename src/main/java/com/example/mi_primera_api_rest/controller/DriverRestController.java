@@ -1,5 +1,6 @@
 package com.example.mi_primera_api_rest.controller;
 
+import com.example.mi_primera_api_rest.dto.DriverDTO;
 import com.example.mi_primera_api_rest.model.Driver;
 import com.example.mi_primera_api_rest.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class DriverRestController {
     }
 
     @GetMapping("/drivers/{code}")
-    public ResponseEntity<Driver> getDriverByCode(@PathVariable String code) {
+    public ResponseEntity<DriverDTO> getDriverDTOByCode(@PathVariable String code) {
         return this.driverService.getDriverByCode(code)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

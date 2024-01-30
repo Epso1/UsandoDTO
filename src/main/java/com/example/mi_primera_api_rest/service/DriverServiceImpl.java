@@ -1,5 +1,7 @@
 package com.example.mi_primera_api_rest.service;
 
+import com.example.mi_primera_api_rest.dto.DriverDTO;
+import com.example.mi_primera_api_rest.mapper.DriverDTOMapper;
 import com.example.mi_primera_api_rest.model.Driver;
 import com.example.mi_primera_api_rest.repository.DriverRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,27 +11,29 @@ import java.util.Optional;
 
 @Service
 public class DriverServiceImpl implements DriverService {
-    private final DriverRepository repository;
+    private final DriverRepository driverRepository;
+    private final DriverDTOMapper driverDTOMapper;
 
     @Autowired
-    public DriverServiceImpl(DriverRepository repository) {
-        this.repository = repository;
+    public DriverServiceImpl(DriverRepository driverRepository, DriverDTOMapper driverDTOMapper) {
+        this.driverRepository = driverRepository;
+        this.driverDTOMapper = driverDTOMapper;
     }
     @Override
     public List<Driver> getAllDrivers() {
-        return repository.findAll();
+        return driverRepository.findAll();
     }
 
     @Override
-    public Optional<Driver> getDriverByCode(String code) {
-        return repository.findByCodeIgnoreCase(code);
+    public Optional<DriverDTO> getDriverByCode(String code) {
+        return driverRepository.findByCodeIgnoreCase(code).map(driverDTOMapper);
     }
 
     @Override
     public void saveDriver(Driver driver) {
-        repository.save(driver);
+        driverRepository.save(driver);
     }
 
     @Override
-    public void deleteDriverByCode(String code) { repository.delete(getDriverByCode(code).get());}
+    public void deleteDriverByCode(String code) { driverRepository.deleteByCodeIgnoreCase(code);}
 }
