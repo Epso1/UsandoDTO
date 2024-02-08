@@ -1,5 +1,6 @@
 package com.example.mi_primera_api_rest.service;
 
+import com.example.mi_primera_api_rest.projections.DriverDetails;
 import com.example.mi_primera_api_rest.dto.DriverDTO;
 import com.example.mi_primera_api_rest.mapper.DriverDTOMapper;
 import com.example.mi_primera_api_rest.model.Driver;
@@ -36,4 +37,10 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public void deleteDriverByCode(String code) { driverRepository.deleteByCodeIgnoreCase(code);}
+
+    @Override
+    public Optional<DriverDetails> getDriverByDriverId(Long id) {
+        return driverRepository.getDriverByDriverId(id);
+    }
+
 }

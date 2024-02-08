@@ -2,6 +2,7 @@ package com.example.mi_primera_api_rest.service;
 
 import com.example.mi_primera_api_rest.model.Constructor;
 import com.example.mi_primera_api_rest.model.Driver;
+import com.example.mi_primera_api_rest.projections.ConstructorDetails;
 import com.example.mi_primera_api_rest.repository.ConstructorRepository;
 import com.example.mi_primera_api_rest.repository.DriverRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,4 +34,11 @@ public class ConstructorServiceImpl implements ConstructorService {
 
     @Override
     public void deleteConstructorByConstructorref(String constructorref) {repository.delete(getConstructorByConstructorref(constructorref).get());}
+
+    @Override
+    public Optional<ConstructorDetails> getConstructorByConstructorId(Long id) {
+        return repository.findByConstructorid(id);
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package com.example.mi_primera_api_rest.service;
 
+import com.example.mi_primera_api_rest.projections.DriverDetails;
 import com.example.mi_primera_api_rest.dto.DriverDTO;
 import com.example.mi_primera_api_rest.model.Driver;
 
@@ -13,4 +14,6 @@ public interface DriverService {
     void saveDriver(Driver driver);
 
     void deleteDriverByCode(String code);
+
+    Optional<DriverDetails> getDriverByDriverId(Long id);
 }

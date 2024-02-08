@@ -2,6 +2,7 @@ package com.example.mi_primera_api_rest.controller;
 
 import com.example.mi_primera_api_rest.model.Constructor;
 import com.example.mi_primera_api_rest.model.Driver;
+import com.example.mi_primera_api_rest.projections.ConstructorDetails;
 import com.example.mi_primera_api_rest.service.ConstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -54,5 +55,12 @@ public class ConstructorRestController {
     public ResponseEntity<Driver> deleteByName(@PathVariable String constructorref) {
         this.constructorService.deleteConstructorByConstructorref(constructorref);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/constructorsid/{id}")
+    public ResponseEntity<ConstructorDetails> getConstructorByConstructorId(@PathVariable Long id) {
+        return this.constructorService.getConstructorByConstructorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }
